@@ -66,7 +66,11 @@
 <div id="modal" class="modal" onclick="if(event.target===this)this.classList.remove('show')"><div class="box"><button class="x" onclick="modal.classList.remove('show')">×</button><div id="detail"></div></div></div>
 
 <script>
-// ===============================\n// CONFIG / DATA SOURCE\n// ===============================\n// Tukar URL CSV di bawah sahaja jika sumber Google Sheet berubah.\nconst CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTGXh5F2HzES62J7YW2A2QVP5TymG9C9ED393M4OF98pfuC883LFtZTAusPjfxqc28WNPLat8LSnYil/pub?gid=0&single=true&output=csv";
+// ===============================
+// CONFIG / DATA SOURCE
+// ===============================
+// Tukar URL CSV di bawah sahaja jika sumber Google Sheet berubah.
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTGXh5F2HzES62J7YW2A2QVP5TymG9C9ED393M4OF98pfuC883LFtZTAusPjfxqc28WNPLat8LSnYil/pub?gid=0&single=true&output=csv";
 let D=[],CH={};const $=x=>document.getElementById(x),N=x=>{let n=Number(String(x??"").replace(/,/g,""));return isFinite(n)?n:0},F=n=>new Intl.NumberFormat("ms-MY").format(n);
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",""":"&quot;","'":"&#039;"}[m]))}
 function dt(x){if(!x)return null;let d=new Date(x);return isNaN(d)?null:d}
