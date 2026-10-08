@@ -92,40 +92,47 @@
   <div id="sidebar-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
 
   <!-- Main Sidebar -->
-  <aside id="sidebar" class="fixed md:sticky top-0 inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out h-screen">
-    <div class="p-5 flex flex-col flex-1 overflow-y-auto">
-      <!-- Brand Logo & Header -->
-      <div class="pb-5 border-b border-slate-100 mb-5">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-700 to-violet-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-200">
-            P
-          </div>
-          <div>
-            <h1 class="text-xl font-extrabold tracking-tight text-slate-900 font-display">PROFUND</h1>
-            <p class="text-[10px] font-semibold tracking-wider text-indigo-600 uppercase">Pusat Penyelidikan UTM</p>
-          </div>
+  <aside id="sidebar" class="fixed md:sticky top-0 inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out h-screen">
+    <!-- Brand Logo & Header (Selari ketinggian & garisan dengan header kanan) -->
+    <div class="h-20 px-5 border-b border-slate-200 flex items-center shrink-0">
+      <div class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-700 to-violet-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-200 shrink-0">
+          P
+        </div>
+        <div>
+          <h1 class="text-lg font-extrabold tracking-tight text-slate-900 font-display leading-tight">PROFUND</h1>
+          <p class="text-[10px] font-semibold tracking-wider text-indigo-600 uppercase leading-none mt-0.5">Pusat Penyelidikan UTM</p>
         </div>
       </div>
+    </div>
 
-      <!-- Navigation Tabs -->
-      <nav class="space-y-1.5 flex-1">
-        <button onclick="switchTab('rumusan', this)" class="nav-tab active w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-indigo-700 bg-indigo-50 transition hover:bg-indigo-50/80">
-          <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-          Rumusan
-        </button>
-        <button onclick="switchTab('hebahan', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
-          <svg class="w-4 h-4 text-slate-400 group-hover:text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-          Hebahan Geran
-        </button>
-        <button onclick="switchTab('analisis', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          Analisis Permohonan
-        </button>
-        <button onclick="switchTab('tarikh', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          Tarikh Tutup
-        </button>
-      </nav>
+    <!-- Sidebar Navigation & Body Content -->
+    <div class="p-5 flex flex-col flex-1 overflow-y-auto justify-between">
+      <div>
+        <p class="text-xs text-slate-500 mb-5 leading-relaxed">
+          Sistem Hebahan Geran &amp; Pengurusan Analisis Permohonan
+        </p>
+
+        <!-- Navigation Tabs -->
+        <nav class="space-y-1.5 flex-1">
+          <button onclick="switchTab('rumusan', this)" class="nav-tab active w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-indigo-700 bg-indigo-50 transition hover:bg-indigo-50/80">
+            <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            Rumusan
+          </button>
+          <button onclick="switchTab('hebahan', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
+            <svg class="w-4 h-4 text-slate-400 group-hover:text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+            Hebahan Geran
+          </button>
+          <button onclick="switchTab('analisis', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Analisis Permohonan
+          </button>
+          <button onclick="switchTab('tarikh', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Tarikh Tutup
+          </button>
+        </nav>
+      </div>
 
       <!-- Sidebar Footer Badge & Actions -->
       <div class="pt-4 border-t border-slate-100 text-xs text-slate-500 space-y-2">
@@ -143,14 +150,14 @@
 
   <!-- Main Content Area -->
   <main class="flex-1 min-w-0 flex flex-col overflow-y-auto">
-    <!-- Top Action Banner -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-20 px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
-      <div>
-        <h2 id="page-title" class="text-lg sm:text-xl font-bold text-slate-900 font-display">Ringkasan Eksekutif Geran</h2>
-        <p class="text-xs text-slate-500">Pusat Pengurusan Penyelidikan (RMC), Universiti Teknologi Malaysia</p>
+    <!-- Top Action Banner (Selari dengan header kiri: h-20 & border-b border-slate-200) -->
+    <header class="h-20 bg-white border-b border-slate-200 sticky top-0 z-20 px-4 sm:px-8 flex items-center justify-between gap-4 shrink-0">
+      <div class="min-w-0">
+        <h2 id="page-title" class="text-lg sm:text-xl font-bold text-slate-900 font-display leading-tight truncate">Ringkasan Eksekutif Geran</h2>
+        <p class="text-xs text-slate-500 leading-tight mt-1 truncate">Pusat Pengurusan Penyelidikan (RMC), Universiti Teknologi Malaysia</p>
       </div>
 
-      <div class="flex items-center gap-2.5 flex-wrap">
+      <div class="flex items-center gap-2.5 flex-wrap shrink-0">
         <!-- Live status pill -->
         <div id="status-pill" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
           <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping inline-block"></span>
@@ -464,13 +471,13 @@
   <div id="modal-container" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div id="modal-card" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-150">
       <!-- Modal Header -->
-      <div class="px-6 py-4 border-b border-slate-100 flex items-start justify-between bg-slate-50/50">
-        <div>
+      <div class="px-6 py-4 border-b border-slate-100 flex items-start justify-between bg-slate-50/50 gap-3">
+        <div class="min-w-0 flex-1">
           <span id="modal-category-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700">Kategori</span>
-          <h3 id="modal-grant-title" class="text-base sm:text-lg font-bold text-slate-900 mt-1 font-display leading-snug">Nama Geran</h3>
-          <p id="modal-grant-sponsor" class="text-xs text-slate-500 font-medium">Penaja</p>
+          <h3 id="modal-grant-title" class="text-base sm:text-lg font-bold text-slate-900 mt-1 font-display leading-snug break-words">Nama Geran</h3>
+          <p id="modal-grant-sponsor" class="text-xs text-slate-500 font-medium break-words mt-0.5">Penaja</p>
         </div>
-        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-100 transition" aria-label="Tutup">
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-100 transition shrink-0" aria-label="Tutup">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
@@ -1150,18 +1157,18 @@
 
         return `
           <tr class="hover:bg-slate-50/70 transition">
-            <td class="py-3 px-4 text-center font-semibold text-slate-400 text-[11px]">${absoluteIndex + 1}</td>
-            <td class="py-3 px-4 font-semibold text-slate-900 max-w-[280px]">
-              <div class="truncate" title="${escapeHTML(item["Nama Geran"])}">${escapeHTML(item["Nama Geran"])}</div>
-              ${item["Bidang (jika berkaitan)"] ? `<div class="text-[10px] text-slate-400 truncate mt-0.5">${escapeHTML(item["Bidang (jika berkaitan)"])}</div>` : ''}
+            <td class="py-3 px-4 text-center font-semibold text-slate-400 text-[11px] align-top">${absoluteIndex + 1}</td>
+            <td class="py-3 px-4 font-semibold text-slate-900 min-w-[240px] max-w-[340px] align-top">
+              <div class="break-words whitespace-normal leading-snug" title="${escapeHTML(item["Nama Geran"])}">${escapeHTML(item["Nama Geran"])}</div>
+              ${item["Bidang (jika berkaitan)"] ? `<div class="text-[10px] text-slate-400 break-words whitespace-normal mt-1 leading-tight">${escapeHTML(item["Bidang (jika berkaitan)"])}</div>` : ''}
             </td>
-            <td class="py-3 px-4 text-slate-600 max-w-[180px] truncate" title="${escapeHTML(item.Penaja)}">${escapeHTML(item.Penaja)}</td>
-            <td class="py-3 px-4 whitespace-nowrap">${getCategoryBadge(item.Kategori)}</td>
-            <td class="py-3 px-4 text-slate-500 whitespace-nowrap">${formatDate(item["Tarikh Hebahan"])}</td>
-            <td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">${formatDate(item["Tarikh Tutup Permohonan (UTM)"])}</td>
-            <td class="py-3 px-4 text-center font-semibold text-slate-700">${formatNum(received)}</td>
-            <td class="py-3 px-4 text-center font-semibold text-emerald-600">${formatNum(approved)}</td>
-            <td class="py-3 px-4 text-center whitespace-nowrap">
+            <td class="py-3 px-4 text-slate-600 min-w-[180px] max-w-[260px] break-words whitespace-normal leading-snug align-top" title="${escapeHTML(item.Penaja)}">${escapeHTML(item.Penaja)}</td>
+            <td class="py-3 px-4 whitespace-nowrap align-top">${getCategoryBadge(item.Kategori)}</td>
+            <td class="py-3 px-4 text-slate-500 whitespace-nowrap align-top">${formatDate(item["Tarikh Hebahan"])}</td>
+            <td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap align-top">${formatDate(item["Tarikh Tutup Permohonan (UTM)"])}</td>
+            <td class="py-3 px-4 text-center font-semibold text-slate-700 align-top">${formatNum(received)}</td>
+            <td class="py-3 px-4 text-center font-semibold text-emerald-600 align-top">${formatNum(approved)}</td>
+            <td class="py-3 px-4 text-center whitespace-nowrap align-top">
               <button onclick="openModal(${rawIndex})" class="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition border border-indigo-200/60 active:scale-95">
                 Perincian
               </button>
@@ -1329,8 +1336,8 @@
                 <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${escapeHTML(item.Kategori || "Umum")}</span>
                 ${badgeHTML}
               </div>
-              <h4 class="text-xs font-bold text-slate-900 line-clamp-2" title="${escapeHTML(item["Nama Geran"])}">${escapeHTML(item["Nama Geran"])}</h4>
-              <p class="text-[11px] text-slate-500 mt-1 truncate">${escapeHTML(item.Penaja)}</p>
+              <h4 class="text-xs font-bold text-slate-900 break-words whitespace-normal leading-snug" title="${escapeHTML(item["Nama Geran"])}">${escapeHTML(item["Nama Geran"])}</h4>
+              <p class="text-[11px] text-slate-600 mt-1 break-words whitespace-normal leading-normal">${escapeHTML(item.Penaja)}</p>
             </div>
 
             <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] space-y-1">
