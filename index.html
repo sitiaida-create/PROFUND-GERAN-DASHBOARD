@@ -1,92 +1,1324 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PROFUND | Dashboard Hebahan Geran</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<style>
-:root{--p:#6d28d9;--p2:#4f46e5;--bg:#f6f7fb;--ink:#172033;--muted:#6b7280;--line:#e5e7eb;--white:#fff;--green:#15803d;--orange:#d97706;--red:#dc2626}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}.layout{display:flex;min-height:100vh}.sidebar{width:235px;flex:0 0 235px;background:#fff;border-right:1px solid var(--line);padding:24px 14px;position:sticky;top:0;height:100vh;z-index:10}.brand{padding:0 10px 24px;border-bottom:1px solid var(--line);margin-bottom:18px}.eyebrow{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--p);line-height:1.5}.brand h1{margin:5px 0 0;font-size:30px;letter-spacing:-.04em}.brand p{color:var(--muted);font-size:12px;line-height:1.45;margin:4px 0 0}.tabs{display:flex;flex-direction:column;gap:5px;border:0}.tab{width:100%;text-align:left;border:0;background:none;border-radius:9px;padding:12px 13px;color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}.tab:hover{background:#f5f3ff;color:var(--p)}.tab.active{color:var(--p);background:#ede9fe}.main{flex:1;min-width:0}.wrap{max-width:1500px;margin:auto;padding:24px}.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px}.head .eyebrow{display:none}h1{margin:5px 0 0;font-size:34px;letter-spacing:-.04em}h1+div{color:var(--muted);font-size:14px;margin-top:4px}.actions{display:flex;gap:8px;align-items:center}.badge{font-size:11px;background:#ede9fe;color:#5b21b6;padding:8px 11px;border-radius:20px;font-weight:700}.btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 13px;cursor:pointer}section{display:none;padding-top:0}section.active{display:block}.title{margin-bottom:18px}.title h2{margin:0;font-size:22px}.title p{margin:5px 0;color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-bottom:16px}.cards.four{grid-template-columns:repeat(4,1fr)}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:0 7px 22px #1720330b}.card span{font-size:12px;color:var(--muted);font-weight:600}.card strong{display:block;font-size:28px;margin-top:7px}.card.main{background:linear-gradient(135deg,var(--p2),var(--p));color:white;border:0}.card.main span{color:#ede9fe}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;min-height:330px;box-shadow:0 7px 22px #1720330b}.pt{font-size:13px;font-weight:800;margin-bottom:12px}.chart{height:275px}.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:9px;margin-bottom:14px}.filters input,.filters select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff}.tablebox{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:auto}table{border-collapse:collapse;width:100%;min-width:1100px}th,td{padding:11px 12px;border-bottom:1px solid var(--line);font-size:12px;text-align:left;vertical-align:top}th{font-size:10px;text-transform:uppercase;color:var(--muted);background:#fafafa}.name{font-weight:700;max-width:330px}.pill{display:inline-block;border-radius:99px;padding:5px 8px;font-size:10px;font-weight:800}.International{background:#ede9fe;color:#6d28d9}.National{background:#e0f2fe;color:#0369a1}.University{background:#dcfce7;color:#15803d}.Industry{background:#ffedd5;color:#c2410c}.view{border:1px solid #ddd6fe;color:#6d28d9;background:#faf5ff;border-radius:7px;padding:6px 9px;cursor:pointer}.foot{font-size:12px;color:var(--muted);padding:9px 2px}.deadlines{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.deadline{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;padding:14px}.deadline.soon{border-left-color:var(--orange)}.deadline.closed{border-left-color:var(--red);opacity:.7}.deadline h3{font-size:13px;margin:0 0 7px}.deadline p{font-size:11px;color:var(--muted);margin:4px 0}.deadline b{color:var(--ink)}.modal{position:fixed;inset:0;background:#0f172a80;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.show{display:flex}.box{background:white;border-radius:15px;padding:24px;max-width:720px;width:100%;max-height:90vh;overflow:auto;position:relative}.x{position:absolute;right:14px;top:12px;border:0;border-radius:50%;width:31px;height:31px;font-size:20px;cursor:pointer}.detail{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden}.detail div{padding:11px;border:1px solid var(--line)}.detail small{display:block;color:var(--muted);margin-bottom:4px}.detail b{font-size:12px}@media(max-width:1000px){.sidebar{width:190px;flex-basis:190px}.cards{grid-template-columns:repeat(2,1fr)}.cards.four,.grid,.deadlines{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr 1fr}}@media(max-width:600px){.layout{display:block}.sidebar{width:100%;height:auto;position:relative;border-right:0;border-bottom:1px solid var(--line);padding:14px}.brand{display:flex;align-items:center;gap:12px;padding:0 4px 12px;margin-bottom:10px}.brand h1{font-size:24px}.brand p{display:none}.tabs{flex-direction:row;overflow-x:auto}.tab{width:auto;text-align:center;padding:10px 12px}.wrap{padding:14px}.head{flex-direction:column;align-items:flex-start}.cards,.cards.four,.grid,.deadlines,.filters{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROFUND | Dashboard Hebahan Geran & Analisis Penyelidikan UTM</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            utm: {
+              red: '#800000',
+              gold: '#D4AF37',
+              dark: '#4A0404',
+            },
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom refined scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .custom-gradient-card {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    }
+    .subtle-shadow {
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+    }
+  </style>
 </head>
-<body>
-<div class="layout">
-<aside class="sidebar">
-<div class="brand"><div><div class="eyebrow">PUSAT PENGURUSAN PENYELIDIKAN · UTM</div><h1>PROFUND</h1><p>Dashboard Hebahan Geran & Analisis Permohonan</p></div></div>
-<nav class="tabs">
-<button class="tab active" onclick="tab('rumusan',this)">Rumusan</button>
-<button class="tab" onclick="tab('hebahan',this)">Hebahan Geran</button>
-<button class="tab" onclick="tab('analisis',this)">Analisis Permohonan</button>
-<button class="tab" onclick="tab('tarikh',this)">Tarikh Tutup</button>
-</nav>
-</aside>
-<main class="main">
-<div class="wrap">
-<header class="head">
-<div><div class="eyebrow">PUSAT PENGURUSAN PENYELIDIKAN · UTM</div><h1>PROFUND</h1><div>Dashboard Hebahan Geran & Analisis Permohonan</div></div>
-<div class="actions"><span id="status" class="badge">Memuatkan…</span><button class="btn" onclick="load()">↻ Kemas Kini</button></div>
-</header>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col md:flex-row">
 
-<section id="rumusan" class="active">
-<div class="title"><h2>Rumusan</h2><p>Gambaran keseluruhan hebahan geran dan prestasi permohonan.</p></div>
-<div class="cards">
-<div class="card"><span>Jumlah Hebahan</span><strong id="total">—</strong></div>
-<div class="card"><span>Permohonan Diterima</span><strong id="received">—</strong></div>
-<div class="card"><span>Dimajukan Kepada Penaja</span><strong id="forwarded">—</strong></div>
-<div class="card"><span>Permohonan Diluluskan</span><strong id="approved">—</strong></div>
-<div class="card main"><span>Kadar Kelulusan</span><strong id="rate">—</strong></div>
-</div>
-<div class="grid"><div class="panel"><div class="pt">Bilangan Hebahan Mengikut Bulan</div><div class="chart"><canvas id="monthly"></canvas></div></div><div class="panel"><div class="pt">Bilangan Hebahan Mengikut Kategori</div><div class="chart"><canvas id="cats"></canvas></div></div></div>
-<div class="grid"><div class="panel"><div class="pt">Permohonan Diterima vs Diluluskan Mengikut Kategori</div><div class="chart"><canvas id="catApps"></canvas></div></div><div class="panel"><div class="pt">10 Penaja Dengan Hebahan Terbanyak</div><div class="chart"><canvas id="sponsors"></canvas></div></div></div>
-</section>
+  <!-- Mobile Header Bar -->
+  <div class="md:hidden flex items-center justify-between bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-30">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-base shadow-sm">
+        P
+      </div>
+      <div>
+        <span class="font-extrabold text-indigo-900 tracking-tight text-lg">PROFUND</span>
+        <span class="text-[10px] text-slate-500 block leading-none font-semibold">RMC UTM</span>
+      </div>
+    </div>
+    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition" aria-label="Buka Menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+    </button>
+  </div>
 
-<section id="hebahan">
-<div class="title"><h2>Hebahan Geran</h2><p>Carian dan penapisan semua rekod.</p></div>
-<div class="filters"><input id="search" placeholder="Cari geran, penaja atau bidang…" oninput="table()"><select id="catFilter" onchange="table()"><option value="">Semua kategori</option></select><select id="yearFilter" onchange="table()"><option value="">Semua tahun</option></select><select id="monthFilter" onchange="table()"><option value="">Semua bulan</option></select></div>
-<div class="tablebox"><table><thead><tr><th>#</th><th>Nama Geran</th><th>Penaja</th><th>Kategori</th><th>Hebahan</th><th>Tutup UTM</th><th>Tutup Penaja</th><th>Terima</th><th>Lulus</th><th></th></tr></thead><tbody id="tbody"></tbody></table></div><div id="count" class="foot"></div>
-</section>
+  <!-- Sidebar Overlay for Mobile -->
+  <div id="sidebar-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
 
-<section id="analisis">
-<div class="title"><h2>Analisis Permohonan</h2><p>Aliran permohonan daripada penerimaan sehingga kelulusan.</p></div>
-<div class="cards four"><div class="card"><span>Geran Ada Permohonan</span><strong id="withApps">—</strong></div><div class="card"><span>Geran Tiada Permohonan</span><strong id="noApps">—</strong></div><div class="card"><span>Jumlah Permohonan</span><strong id="apps">—</strong></div><div class="card"><span>Jumlah Diluluskan</span><strong id="appsApproved">—</strong></div></div>
-<div class="grid"><div class="panel"><div class="pt">Aliran Permohonan</div><div class="chart"><canvas id="pipeline"></canvas></div></div><div class="panel"><div class="pt">Prestasi Mengikut Kategori</div><div class="chart"><canvas id="performance"></canvas></div></div></div>
-</section>
+  <!-- Main Sidebar -->
+  <aside id="sidebar" class="fixed md:sticky top-0 inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out h-screen">
+    <div class="p-5 flex flex-col flex-1 overflow-y-auto">
+      <!-- Brand Logo & Header -->
+      <div class="pb-5 border-b border-slate-100 mb-5">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-700 to-violet-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-200">
+            P
+          </div>
+          <div>
+            <h1 class="text-xl font-extrabold tracking-tight text-slate-900 font-display">PROFUND</h1>
+            <p class="text-[10px] font-semibold tracking-wider text-indigo-600 uppercase">Pusat Penyelidikan UTM</p>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+          Sistem Hebahan Geran & Pengurusan Analisis Permohonan
+        </p>
+      </div>
 
-<section id="tarikh">
-<div class="title"><h2>Tarikh Tutup Permohonan</h2><p>Status berdasarkan tarikh tutup UTM.</p></div>
-<div class="cards four"><div class="card"><span>Masih Dibuka</span><strong id="open">—</strong></div><div class="card"><span>Akan Tutup ≤ 14 Hari</span><strong id="soon">—</strong></div><div class="card"><span>Sudah Tutup</span><strong id="closed">—</strong></div><div class="card"><span>Tiada Tarikh</span><strong id="nodate">—</strong></div></div>
-<div class="filters"><input id="dateSearch" placeholder="Cari geran atau penaja…" oninput="deadlines()"><select id="dateFilter" onchange="deadlines()"><option value="">Semua status</option><option value="open">Masih Dibuka</option><option value="soon">Akan Tutup ≤ 14 Hari</option><option value="closed">Sudah Tutup</option><option value="nodate">Tiada Tarikh</option></select></div>
-<div id="deadlines" class="deadlines"></div>
-</section>
-</div>
-</main>
-</div>
+      <!-- Navigation Tabs -->
+      <nav class="space-y-1.5 flex-1">
+        <button onclick="switchTab('rumusan', this)" class="nav-tab active w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-indigo-700 bg-indigo-50 transition hover:bg-indigo-50/80">
+          <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          Rumusan
+        </button>
+        <button onclick="switchTab('hebahan', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
+          <svg class="w-4 h-4 text-slate-400 group-hover:text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+          Hebahan Geran
+        </button>
+        <button onclick="switchTab('analisis', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Analisis Permohonan
+        </button>
+        <button onclick="switchTab('tarikh', this)" class="nav-tab w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Tarikh Tutup
+        </button>
+      </nav>
 
-<div id="modal" class="modal" onclick="if(event.target===this)this.classList.remove('show')"><div class="box"><button class="x" onclick="modal.classList.remove('show')">×</button><div id="detail"></div></div></div>
+      <!-- Sidebar Footer Badge & Actions -->
+      <div class="pt-4 border-t border-slate-100 text-xs text-slate-500 space-y-2">
+        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+          <span>Versi Sistem</span>
+          <span>v2.4 Live</span>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-100 flex items-center gap-2 text-[11px]">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-slate-600">Sync: RMC Research Portal</span>
+        </div>
+      </div>
+    </div>
+  </aside>
 
-<script>
-// ===============================
-// CONFIG / DATA SOURCE
-// ===============================
-// Tukar URL CSV di bawah sahaja jika sumber Google Sheet berubah.
-const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTGXh5F2HzES62J7YW2A2QVP5TymG9C9ED393M4OF98pfuC883LFtZTAusPjfxqc28WNPLat8LSnYil/pub?gid=0&single=true&output=csv";
-let D=[],CH={};const $=x=>document.getElementById(x),N=x=>{let n=Number(String(x??"").replace(/,/g,""));return isFinite(n)?n:0},F=n=>new Intl.NumberFormat("ms-MY").format(n);
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",""":"&quot;","'":"&#039;"}[m]))}
-function dt(x){if(!x)return null;let d=new Date(x);return isNaN(d)?null:d}
-function fd(x){let d=dt(x);return d?d.toLocaleDateString("ms-MY",{day:"2-digit",month:"2-digit",year:"numeric"}):"—"}
-function csv(t){let a=[],r=[],c="",q=false;for(let i=0;i<t.length;i++){let x=t[i],n=t[i+1];if(x==='"'&&q&&n==='"'){c+='"';i++;continue}if(x==='"'){q=!q;continue}if(x===","&&!q){r.push(c);c="";continue}if((x==="\n"||x==="\r")&&!q){if(x==="\r"&&n==="\n")i++;r.push(c);if(r.some(v=>v.trim()))a.push(r);r=[];c="";continue}c+=x}if(c||r.length){r.push(c);a.push(r)}let h=a.shift().map(v=>v.trim());return a.map(v=>Object.fromEntries(h.map((k,i)=>[k,(v[i]??"").trim()])))} 
-async function load(){try{$("status").textContent="Memuatkan…";let r=await fetch(CSV_URL+"&_="+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;D=csv(await r.text());$("status").textContent="LIVE · Google Sheet";render()}catch(e){$("status").textContent="Gagal membaca Google Sheet";$("tbody").innerHTML='<tr><td colspan="10">Tidak dapat membaca sumber Google Sheet. Pastikan Published CSV masih aktif.</td></tr>'}}
-function tab(id,b){document.querySelectorAll("section").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");b.classList.add("active")}
-function render(){kpi();filters();charts();table();deadlines()}
-function kpi(){let r=D.reduce((s,x)=>s+N(x["Bilangan Permohonan Diterima"]),0),f=D.reduce((s,x)=>s+N(x["Bilangan Permohonan Dimajukan Kepada Penaja"]),0),a=D.reduce((s,x)=>s+N(x["Bilangan Permohonan Diluluskan"]),0);$("total").textContent=F(D.length);$("received").textContent=F(r);$("forwarded").textContent=F(f);$("approved").textContent=F(a);$("rate").textContent=r?(a/r*100).toFixed(1)+"%":"—";let wa=D.filter(x=>N(x["Bilangan Permohonan Diterima"])>0).length;$("withApps").textContent=F(wa);$("noApps").textContent=F(D.length-wa);$("apps").textContent=F(r);$("appsApproved").textContent=F(a);let t=new Date();t.setHours(0,0,0,0);let o=0,s=0,c=0,n=0;D.forEach(x=>{let d=dt(x["Tarikh Tutup Permohonan (UTM)"]);if(!d)n++;else{d.setHours(0,0,0,0);let z=(d-t)/86400000;if(z<0)c++;else if(z<=14)s++;else o}});$("open").textContent=F(o);$("soon").textContent=F(s);$("closed").textContent=F(c);$("nodate").textContent=F(n)}
-function filters(){let cats=[...new Set(D.map(x=>x.Kategori).filter(Boolean))].sort(),years=[...new Set(D.map(x=>x.Tahun).filter(Boolean))].sort();$("catFilter").innerHTML='<option value="">Semua kategori</option>'+cats.map(x=>'<option>'+esc(x)+'</option>').join("");$("yearFilter").innerHTML='<option value="">Semua tahun</option>'+years.map(x=>'<option>'+esc(x)+'</option>').join("");let ms=[...new Set(D.map(x=>{let d=dt(x["Tarikh Hebahan"]);return d?d.getMonth()+1:null}).filter(Boolean))].sort((a,b)=>a-b);$("monthFilter").innerHTML='<option value="">Semua bulan</option>'+ms.map(m=>'<option value="'+m+'">'+new Date(2026,m-1,1).toLocaleString("ms-MY",{month:"long"})+'</option>').join("")}
-function make(id,type,labels,sets,opt={}){if(CH[id])CH[id].destroy();CH[id]=new Chart($(id),{type,data:{labels,datasets:sets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:type==="doughnut"?{}:{y:{beginAtZero:true}},...opt}})}
-function charts(){let m={};D.forEach(x=>{let d=dt(x["Tarikh Hebahan"]);if(d){let k=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");m[k]=(m[k]||0)+1}});let ks=Object.keys(m).sort();make("monthly","bar",ks.map(k=>{let [y,z]=k.split("-");return new Date(+y,+z-1,1).toLocaleString("ms-MY",{month:"short",year:"numeric"})}),[{label:"Hebahan",data:ks.map(k=>m[k]),borderRadius:5}]);let cats=[...new Set(D.map(x=>x.Kategori).filter(Boolean))];make("cats","doughnut",cats,[{label:"Geran",data:cats.map(c=>D.filter(x=>x.Kategori===c).length)}]);make("catApps","bar",cats,[{label:"Diterima",data:cats.map(c=>D.filter(x=>x.Kategori===c).reduce((s,x)=>s+N(x["Bilangan Permohonan Diterima"]),0))},{label:"Diluluskan",data:cats.map(c=>D.filter(x=>x.Kategori===c).reduce((s,x)=>s+N(x["Bilangan Permohonan Diluluskan"]),0))}]);let sp={};D.forEach(x=>sp[x.Penaja]=(sp[x.Penaja]||0)+1);let top=Object.entries(sp).sort((a,b)=>b[1]-a[1]).slice(0,10);make("sponsors","bar",top.map(x=>x[0]),[{label:"Hebahan",data:top.map(x=>x[1]),borderRadius:5}],{indexAxis:"y"});make("pipeline","bar",["Diterima","Dimajukan","Diluluskan"],[{label:"Jumlah",data:[D.reduce((s,x)=>s+N(x["Bilangan Permohonan Diterima"]),0),D.reduce((s,x)=>s+N(x["Bilangan Permohonan Dimajukan Kepada Penaja"]),0),D.reduce((s,x)=>s+N(x["Bilangan Permohonan Diluluskan"]),0)],borderRadius:5}]);make("performance","bar",cats,[{label:"Diterima",data:cats.map(c=>D.filter(x=>x.Kategori===c).reduce((s,x)=>s+N(x["Bilangan Permohonan Diterima"]),0))},{label:"Dimajukan",data:cats.map(c=>D.filter(x=>x.Kategori===c).reduce((s,x)=>s+N(x["Bilangan Permohonan Dimajukan Kepada Penaja"]),0))},{label:"Diluluskan",data:cats.map(c=>D.filter(x=>x.Kategori===c).reduce((s,x)=>s+N(x["Bilangan Permohonan Diluluskan"]),0))}])}
-function table(){let q=$("search").value.toLowerCase(),c=$("catFilter").value,y=$("yearFilter").value,m=$("monthFilter").value,a=D.filter(x=>{let d=dt(x["Tarikh Hebahan"]);return(!q||[x["Nama Geran"],x.Penaja,x["Bidang (jika berkaitan)"]].join(" ").toLowerCase().includes(q))&&(!c||x.Kategori===c)&&(!y||String(x.Tahun)===y)&&(!m||d&&d.getMonth()+1==m)});$("count").textContent="Memaparkan "+F(a.length)+" daripada "+F(D.length)+" rekod";$("tbody").innerHTML=a.map((x,i)=>'<tr><td>'+(i+1)+'</td><td class="name">'+esc(x["Nama Geran"])+'</td><td>'+esc(x.Penaja)+'</td><td><span class="pill '+esc(x.Kategori)+'">'+esc(x.Kategori)+'</span></td><td>'+fd(x["Tarikh Hebahan"])+'</td><td>'+fd(x["Tarikh Tutup Permohonan (UTM)"])+'</td><td>'+fd(x["Tarikh Tutup Permohonan (Penaja)"])+'</td><td>'+F(N(x["Bilangan Permohonan Diterima"]))+'</td><td>'+F(N(x["Bilangan Permohonan Diluluskan"]))+'</td><td><button class="view" onclick="show('+D.indexOf(x)+')">Lihat</button></td></tr>').join("")}
-function stat(x){let d=dt(x["Tarikh Tutup Permohonan (UTM)"]);if(!d)return"nodate";let t=new Date();t.setHours(0,0,0,0);d.setHours(0,0,0,0);let z=(d-t)/86400000;return z<0?"closed":z<=14?"soon":"open"}
-function deadlines(){let q=$("dateSearch").value.toLowerCase(),s=$("dateFilter").value,a=D.filter(x=>(!s||stat(x)===s)&&(!q||[x["Nama Geran"],x.Penaja].join(" ").toLowerCase().includes(q))).sort((x,y)=>(dt(x["Tarikh Tutup Permohonan (UTM)"])||new Date(9999,0,1))-(dt(y["Tarikh Tutup Permohonan (UTM)"])||new Date(9999,0,1)));$("deadlines").innerHTML=a.map(x=>{let st=stat(x),d=dt(x["Tarikh Tutup Permohonan (UTM)"]),txt=st==="nodate"?"Tiada tarikh tutup":st==="closed"?"Sudah tutup":Math.ceil((d-new Date().setHours(0,0,0,0))/86400000)+" hari lagi";return '<div class="deadline '+st+'"><h3>'+esc(x["Nama Geran"])+'</h3><p>'+esc(x.Penaja)+" · "+esc(x.Kategori)+'</p><p>Tutup UTM: <b>'+fd(x["Tarikh Tutup Permohonan (UTM)"])+'</b></p><p><b>'+txt+"</b></p></div>"}).join("")||"<p>Tiada rekod.</p>"}
-function show(i){let x=D[i],r=N(x["Bilangan Permohonan Diterima"]),a=N(x["Bilangan Permohonan Diluluskan"]);$("detail").innerHTML='<h2>'+esc(x["Nama Geran"])+'</h2><p style="color:#6b7280;font-size:12px">'+esc(x.Penaja)+" · "+esc(x.Kategori)+'</p><div class="detail">'+[["Bidang",x["Bidang (jika berkaitan)"]],["Tarikh Hebahan",fd(x["Tarikh Hebahan"])],["Tutup UTM",fd(x["Tarikh Tutup Permohonan (UTM)"])],["Tutup Penaja",fd(x["Tarikh Tutup Permohonan (Penaja)"])],["Permohonan Diterima",F(r)],["Dimajukan",F(N(x["Bilangan Permohonan Dimajukan Kepada Penaja"]))],["Diluluskan",F(a)],["Kadar Kelulusan",r?(a/r*100).toFixed(1)+"%":"—"],["Tahun",x.Tahun],["Email",x.Email]].map(v=>'<div><small>'+v[0]+'</small><b>'+esc(v[1]||"—")+"</b></div>").join("")+"</div>";$("modal").classList.add("show")}
-load();
-</script>
-</body></html>
+  <!-- Main Content Area -->
+  <main class="flex-1 min-w-0 flex flex-col overflow-y-auto">
+    <!-- Top Action Banner -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-20 px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h2 id="page-title" class="text-lg sm:text-xl font-bold text-slate-900 font-display">Ringkasan Eksekutif Geran</h2>
+        <p class="text-xs text-slate-500">Pusat Pengurusan Penyelidikan (RMC), Universiti Teknologi Malaysia</p>
+      </div>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <!-- Live status pill -->
+        <div id="status-pill" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping inline-block"></span>
+          <span id="status-text">Memuatkan data…</span>
+        </div>
+
+        <!-- Reload Button -->
+        <button onclick="fetchData()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm transition active:scale-95" title="Muat semula daripada Google Sheet">
+          <svg id="refresh-icon" class="w-3.5 h-3.5 text-slate-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Kemas Kini</span>
+        </button>
+
+        <!-- Export CSV Button -->
+        <button onclick="exportCSV()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700 hover:bg-indigo-100 shadow-sm transition active:scale-95">
+          <svg class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Eksport CSV</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="p-4 sm:p-8 space-y-6 max-w-7xl w-full mx-auto">
+
+      <section id="tab-rumusan" class="tab-content space-y-6">
+        <!-- Top Metric Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4">
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 subtle-shadow relative overflow-hidden">
+            <span class="text-xs font-medium text-slate-500">Jumlah Hebahan</span>
+            <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 font-display" id="total-grants">—</div>
+            <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-emerald-600 font-semibold">● Rekod Aktif</span> di pangkalan data
+            </div>
+          </div>
+
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 subtle-shadow">
+            <span class="text-xs font-medium text-slate-500">Permohonan Diterima</span>
+            <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 font-display" id="total-received">—</div>
+            <div class="text-[11px] text-slate-400 mt-1">Didaftarkan oleh penyelidik</div>
+          </div>
+
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 subtle-shadow">
+            <span class="text-xs font-medium text-slate-500">Dimajukan ke Penaja</span>
+            <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 font-display" id="total-forwarded">—</div>
+            <div class="text-[11px] text-slate-400 mt-1">Disemak & diperaku RMC</div>
+          </div>
+
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 subtle-shadow">
+            <span class="text-xs font-medium text-slate-500">Permohonan Diluluskan</span>
+            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-2 font-display" id="total-approved">—</div>
+            <div class="text-[11px] text-slate-400 mt-1">Berjaya peroleh penajaan</div>
+          </div>
+
+          <div class="col-span-2 lg:col-span-1 custom-gradient-card p-4 sm:p-5 rounded-2xl text-white shadow-lg shadow-indigo-500/20">
+            <span class="text-xs font-medium text-indigo-100">Kadar Kelulusan</span>
+            <div class="text-2xl sm:text-3xl font-extrabold mt-2 font-display" id="approval-rate">—</div>
+            <div class="text-[11px] text-indigo-200 mt-1">Nisbah Dilulus / Diterima</div>
+          </div>
+        </div>
+
+        <!-- Charts Grid Row 1 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Monthly Trend -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 subtle-shadow flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-sm font-bold text-slate-800">Bilangan Hebahan Mengikut Garis Masa Bulan</h3>
+                <p class="text-xs text-slate-400">Trend pengumuman peluang geran penyelidikan</p>
+              </div>
+              <span class="px-2 py-1 rounded bg-slate-100 text-[10px] font-semibold text-slate-600">Bulanan</span>
+            </div>
+            <div class="relative h-64 sm:h-72 w-full flex-1">
+              <canvas id="chart-monthly"></canvas>
+            </div>
+          </div>
+
+          <!-- Category Doughnut -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 subtle-shadow flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-sm font-bold text-slate-800">Komposisi Geran Mengikut Kategori</h3>
+                <p class="text-xs text-slate-400">Pembahagian antarabangsa, kebangsaan, universiti & industri</p>
+              </div>
+              <span class="px-2 py-1 rounded bg-slate-100 text-[10px] font-semibold text-slate-600">Taburan</span>
+            </div>
+            <div class="relative h-64 sm:h-72 w-full flex-1 flex items-center justify-center">
+              <canvas id="chart-category"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Grid Row 2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Apps vs Approved by Category -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 subtle-shadow">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-sm font-bold text-slate-800">Permohonan Diterima vs Diluluskan Mengikut Kategori</h3>
+                <p class="text-xs text-slate-400">Perbandingan sambutan dan kadar kejayaan kategori</p>
+              </div>
+            </div>
+            <div class="relative h-64 sm:h-72 w-full">
+              <canvas id="chart-cat-apps"></canvas>
+            </div>
+          </div>
+
+          <!-- Top 10 Sponsors -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 subtle-shadow">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-sm font-bold text-slate-800">Top 10 Badan Penaja Tertinggi</h3>
+                <p class="text-xs text-slate-400">Agensi, kementerian & yayasan penaja terbanyak</p>
+              </div>
+            </div>
+            <div class="relative h-64 sm:h-72 w-full">
+              <canvas id="chart-sponsors"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-hebahan" class="tab-content hidden space-y-4">
+        <!-- Filter Controls Bar -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 subtle-shadow flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+          <div class="relative flex-1">
+            <input id="search-input" type="text" placeholder="Cari tajuk geran, nama penaja atau bidang..." oninput="handleFilterChange()" class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <select id="filter-cat" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
+              <option value="">Semua Kategori</option>
+            </select>
+            <select id="filter-year" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
+              <option value="">Semua Tahun</option>
+            </select>
+            <select id="filter-month" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700 col-span-2 sm:col-span-1">
+              <option value="">Semua Bulan</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 subtle-shadow overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[950px]">
+              <thead>
+                <tr class="bg-slate-50/80 border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                  <th class="py-3 px-4 w-12 text-center">#</th>
+                  <th class="py-3 px-4">Nama Geran</th>
+                  <th class="py-3 px-4">Penaja</th>
+                  <th class="py-3 px-4">Kategori</th>
+                  <th class="py-3 px-4">Tarikh Hebahan</th>
+                  <th class="py-3 px-4">Tutup UTM</th>
+                  <th class="py-3 px-4 text-center">Terima</th>
+                  <th class="py-3 px-4 text-center">Lulus</th>
+                  <th class="py-3 px-4 text-center">Tindakan</th>
+                </tr>
+              </thead>
+              <tbody id="table-body" class="divide-y divide-slate-100 text-xs">
+                <!-- Dynamically populated rows -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table Footer Pagination / Summary -->
+          <div class="p-3.5 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+            <span id="table-count-label">Memaparkan 0 rekod</span>
+            <div class="flex items-center gap-1.5">
+              <button id="btn-prev" onclick="changePage(-1)" class="px-2.5 py-1 text-xs rounded-lg border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:pointer-events-none">Sebelumnya</button>
+              <span id="page-indicator" class="px-2 font-medium text-slate-700">1 / 1</span>
+              <button id="btn-next" onclick="changePage(1)" class="px-2.5 py-1 text-xs rounded-lg border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:pointer-events-none">Seterusnya</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-analisis" class="tab-content hidden space-y-6">
+        <!-- Mini Stats for Applications -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 subtle-shadow">
+            <span class="text-xs font-medium text-slate-500">Geran Ada Permohonan</span>
+            <div class="text-2xl font-bold text-slate-900 mt-1.5 font-display" id="analisis-with-apps">—</div>
+            <span class="text-[11px] text-slate-400">Ada sambutan penyelidik</span>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 subtle-shadow">
+            <span class="text-xs font-medium text-slate-500">Geran Tiada Permohonan</span>
+            <div class="text-2xl font-bold text-slate-900 mt-1.5 font-display" id="analisis-no-apps">—</div>
+            <span class="text-[11px] text-slate-400">0 permohonan dihantar</span>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 subtle-shadow">
+            <span class="text-xs font-medium text-slate-500">Jumlah Permohonan</span>
+            <div class="text-2xl font-bold text-indigo-600 mt-1.5 font-display" id="analisis-total-apps">—</div>
+            <span class="text-[11px] text-slate-400">Jumlah permohonan terkumpul</span>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 subtle-shadow">
+            <span class="text-xs font-medium text-slate-500">Berjaya Diluluskan</span>
+            <div class="text-2xl font-bold text-emerald-600 mt-1.5 font-display" id="analisis-approved-apps">—</div>
+            <span class="text-[11px] text-slate-400">Tawaran rasmi penaja</span>
+          </div>
+        </div>
+
+        <!-- Funnel / Pipeline Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 subtle-shadow">
+            <div class="mb-4">
+              <h3 class="text-sm font-bold text-slate-800">Aliran Pemprosesan Permohonan (Pipeline)</h3>
+              <p class="text-xs text-slate-400">Dari peringkat Diterima, Dimajukan sehingga Diluluskan</p>
+            </div>
+            <div class="relative h-72 w-full">
+              <canvas id="chart-pipeline"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 subtle-shadow">
+            <div class="mb-4">
+              <h3 class="text-sm font-bold text-slate-800">Prestasi Penukaran Mengikut Kategori</h3>
+              <p class="text-xs text-slate-400">Perbandingan permohonan vs penajaan akhir</p>
+            </div>
+            <div class="relative h-72 w-full">
+              <canvas id="chart-performance"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-tarikh" class="tab-content hidden space-y-6">
+        <!-- Status summary tabs -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+          <div class="bg-white p-4 rounded-2xl border border-emerald-200 subtle-shadow flex flex-col justify-between">
+            <span class="text-xs font-medium text-emerald-700 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Masih Dibuka
+            </span>
+            <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-open">—</div>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border border-amber-200 subtle-shadow flex flex-col justify-between">
+            <span class="text-xs font-medium text-amber-700 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span> Segera (≤ 14 Hari)
+            </span>
+            <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-soon">—</div>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border border-rose-200 subtle-shadow flex flex-col justify-between">
+            <span class="text-xs font-medium text-rose-700 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span> Sudah Tutup
+            </span>
+            <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-closed">—</div>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 subtle-shadow flex flex-col justify-between">
+            <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span> Tiada Tarikh Tutup
+            </span>
+            <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-nodate">—</div>
+          </div>
+        </div>
+
+        <!-- Filter bar for Deadlines -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 subtle-shadow flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <input id="deadline-search" type="text" placeholder="Cari nama geran atau penaja..." oninput="renderDeadlines()" class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+          <select id="deadline-filter-status" onchange="renderDeadlines()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
+            <option value="">Semua Status Tarikh</option>
+            <option value="open">Masih Dibuka</option>
+            <option value="soon">Segera (≤ 14 Hari)</option>
+            <option value="closed">Sudah Tutup</option>
+            <option value="nodate">Tiada Tarikh Tetap</option>
+          </select>
+        </div>
+
+        <!-- Deadlines Grid Container -->
+        <div id="deadlines-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Cards populated by JS -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Grant Detail Modal -->
+  <div id="modal-container" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div id="modal-card" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-150">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-slate-100 flex items-start justify-between bg-slate-50/50">
+        <div>
+          <span id="modal-category-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700">Kategori</span>
+          <h3 id="modal-grant-title" class="text-base sm:text-lg font-bold text-slate-900 mt-1 font-display leading-snug">Nama Geran</h3>
+          <p id="modal-grant-sponsor" class="text-xs text-slate-500 font-medium">Penaja</p>
+        </div>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-100 transition" aria-label="Tutup">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div id="modal-content" class="p-6 overflow-y-auto space-y-4 text-xs">
+        <!-- Details grid generated via JS -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+        <span class="text-[11px] text-slate-400">RMC UTM Grants Management</span>
+        <div class="flex items-center gap-2">
+          <button onclick="copyModalDetails()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700 hover:bg-white text-xs font-semibold transition active:scale-95">Salin Butiran</button>
+          <button onclick="closeModal()" class="px-4 py-1.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 text-xs font-semibold shadow-sm transition active:scale-95">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white text-xs font-medium px-4 py-2.5 rounded-xl shadow-lg border border-slate-800 transition-all opacity-0 pointer-events-none translate-y-2">
+    Mesej notifikasi
+  </div>
+
+  <script>
+    // Configuration & Data Source
+    const GOOGLE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGXh5F2HzES62J7YW2A2QVP5TymG9C9ED393M4OF98pfuC883LFtZTAusPjfxqc28WNPLat8LSnYil/pub?gid=0&single=true&output=csv";
+
+    // Application state
+    let RAW_DATA = [];
+    let FILTERED_DATA = [];
+    let CHART_INSTANCES = {};
+    let CURRENT_PAGE = 1;
+    const PAGE_SIZE = 12;
+    let ACTIVE_MODAL_ITEM = null;
+
+    // Standard Malaysian UTM mock dataset for seamless fallback / demo
+    const FALLBACK_DATA = [
+      {
+        "Nama Geran": "Fundamental Research Grant Scheme (FRGS) Fasa 1/2026",
+        "Penaja": "Kementerian Pendidikan Tinggi (KPT)",
+        "Kategori": "National",
+        "Bidang (jika berkaitan)": "Teknologi Maklumat & Komunikasi (ICT)",
+        "Tarikh Hebahan": "2026-01-15",
+        "Tarikh Tutup Permohonan (UTM)": "2026-03-31",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-04-15",
+        "Bilangan Permohonan Diterima": "64",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "52",
+        "Bilangan Permohonan Diluluskan": "18",
+        "Tahun": "2026",
+        "Email": "rmc.frgs@utm.my"
+      },
+      {
+        "Nama Geran": "Prototype Development Research Grant (PRGS) 2026",
+        "Penaja": "Kementerian Pendidikan Tinggi (KPT)",
+        "Kategori": "National",
+        "Bidang (jika berkaitan)": "Kejuruteraan & Pembuatan Pintar",
+        "Tarikh Hebahan": "2026-02-01",
+        "Tarikh Tutup Permohonan (UTM)": "2026-04-20",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-05-02",
+        "Bilangan Permohonan Diterima": "22",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "17",
+        "Bilangan Permohonan Diluluskan": "7",
+        "Tahun": "2026",
+        "Email": "rmc.prgs@utm.my"
+      },
+      {
+        "Nama Geran": "Horizon Europe Joint Collaborative Action",
+        "Penaja": "European Commission",
+        "Kategori": "International",
+        "Bidang (jika berkaitan)": "Kelestarian Tenaga & Perubahan Iklim",
+        "Tarikh Hebahan": "2026-01-20",
+        "Tarikh Tutup Permohonan (UTM)": "2026-04-28",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-05-15",
+        "Bilangan Permohonan Diterima": "14",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "10",
+        "Bilangan Permohonan Diluluskan": "4",
+        "Tahun": "2026",
+        "Email": "international.rmc@utm.my"
+      },
+      {
+        "Nama Geran": "PETRONAS University Grant Initiative (PUGI)",
+        "Penaja": "PETRONAS Research Sdn Bhd",
+        "Kategori": "Industry",
+        "Bidang (jika berkaitan)": "Penyahkarbonan & Biofuel Hijau",
+        "Tarikh Hebahan": "2026-02-15",
+        "Tarikh Tutup Permohonan (UTM)": "2026-05-10",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-05-25",
+        "Bilangan Permohonan Diterima": "19",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "15",
+        "Bilangan Permohonan Diluluskan": "6",
+        "Tahun": "2026",
+        "Email": "industrial.grant@utm.my"
+      },
+      {
+        "Nama Geran": "Geran Universiti Penyelidikan (GUP) Tier 1",
+        "Penaja": "Pusat Pengurusan Penyelidikan (UTM)",
+        "Kategori": "University",
+        "Bidang (jika berkaitan)": "Multidisiplin & Pemerkasaan Fakulti",
+        "Tarikh Hebahan": "2026-01-05",
+        "Tarikh Tutup Permohonan (UTM)": "2026-02-28",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-02-28",
+        "Bilangan Permohonan Diterima": "110",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "110",
+        "Bilangan Permohonan Diluluskan": "45",
+        "Tahun": "2026",
+        "Email": "gup@utm.my"
+      },
+      {
+        "Nama Geran": "CREST Targeted R&D Grant (Cycle 1/2026)",
+        "Penaja": "Collaborative Research in Engineering, Science & Tech (CREST)",
+        "Kategori": "Industry",
+        "Bidang (jika berkaitan)": "Semikonduktor & Mikrolektronik",
+        "Tarikh Hebahan": "2026-02-10",
+        "Tarikh Tutup Permohonan (UTM)": "2026-04-12",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-04-30",
+        "Bilangan Permohonan Diterima": "16",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "12",
+        "Bilangan Permohonan Diluluskan": "5",
+        "Tahun": "2026",
+        "Email": "crest.liaison@utm.my"
+      },
+      {
+        "Nama Geran": "Japan-ASEAN Science & Technology Joint Research (e-ASIA JRP)",
+        "Penaja": "Japan Science and Technology Agency (JST)",
+        "Kategori": "International",
+        "Bidang (jika berkaitan)": "Kesihatan & Bioperubatan",
+        "Tarikh Hebahan": "2026-01-10",
+        "Tarikh Tutup Permohonan (UTM)": "2026-03-15",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-03-30",
+        "Bilangan Permohonan Diterima": "9",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "6",
+        "Bilangan Permohonan Diluluskan": "2",
+        "Tahun": "2026",
+        "Email": "global.rmc@utm.my"
+      },
+      {
+        "Nama Geran": "Malaysia Social Innovation (MySI) 2026",
+        "Penaja": "Kementerian Sains, Teknologi dan Inovasi (MOSTI)",
+        "Kategori": "National",
+        "Bidang (jika berkaitan)": "Inovasi Sosial & Komuniti Luar Bandar",
+        "Tarikh Hebahan": "2026-02-25",
+        "Tarikh Tutup Permohonan (UTM)": "2026-05-30",
+        "Tarikh Tutup Permohonan (Penaja)": "2026-06-15",
+        "Bilangan Permohonan Diterima": "28",
+        "Bilangan Permohonan Dimajukan Kepada Penaja": "20",
+        "Bilangan Permohonan Diluluskan": "8",
+        "Tahun": "2026",
+        "Email": "mysi@utm.my"
+      }
+    ];
+
+    // Helper functions
+    const $ = id => document.getElementById(id);
+    const toNum = v => {
+      const n = Number(String(v ?? "").replace(/,/g, ""));
+      return isFinite(n) ? n : 0;
+    };
+    const formatNum = n => new Intl.NumberFormat("ms-MY").format(n);
+    const escapeHTML = str => String(str ?? "").replace(/[&<>"']/g, m => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[m]));
+
+    function parseDate(val) {
+      if (!val) return null;
+      const d = new Date(val);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function formatDate(val) {
+      const d = parseDate(val);
+      if (!d) return "—";
+      return d.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
+    }
+
+    function showToast(msg) {
+      const toast = $("toast");
+      toast.textContent = msg;
+      toast.classList.remove("opacity-0", "translate-y-2");
+      toast.classList.add("opacity-100", "translate-y-0");
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-2");
+        toast.classList.remove("opacity-100", "translate-y-0");
+      }, 3000);
+    }
+
+    function parseCSV(text) {
+      const lines = [];
+      let row = [];
+      let currentVal = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"' && inQuotes && nextChar === '"') {
+          currentVal += '"';
+          i++;
+          continue;
+        }
+        if (char === '"') {
+          inQuotes = !inQuotes;
+          continue;
+        }
+        if (char === ',' && !inQuotes) {
+          row.push(currentVal);
+          currentVal = "";
+          continue;
+        }
+        if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && nextChar === '\n') i++;
+          row.push(currentVal);
+          if (row.some(val => val.trim())) lines.push(row);
+          row = [];
+          currentVal = "";
+          continue;
+        }
+        currentVal += char;
+      }
+      if (currentVal || row.length) {
+        row.push(currentVal);
+        lines.push(row);
+      }
+      if (lines.length < 2) return [];
+
+      const headers = lines[0].map(h => h.trim());
+      return lines.slice(1).map(r => {
+        const entry = {};
+        headers.forEach((h, idx) => {
+          entry[h] = (r[idx] ?? "").trim();
+        });
+        return entry;
+      });
+    }
+
+    async function fetchData() {
+      const statusPill = $("status-pill");
+      const statusText = $("status-text");
+      const refreshIcon = $("refresh-icon");
+
+      refreshIcon.classList.add("animate-spin");
+      statusText.textContent = "Menyegerak data…";
+      statusPill.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200";
+
+      try {
+        const res = await fetch(GOOGLE_CSV_URL + "&_t=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("Status " + res.status);
+        const text = await res.text();
+        const parsed = parseCSV(text);
+
+        if (!parsed || parsed.length === 0) throw new Error("Data CSV kosong");
+
+        RAW_DATA = parsed;
+        statusText.textContent = "Google Sheet Live (" + RAW_DATA.length + " rekod)";
+        statusPill.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200";
+        showToast("Penyegerakan Google Sheet berjaya!");
+      } catch (err) {
+        console.warn("Gagal membaca Google Sheet; memuatkan data sandaran", err);
+        RAW_DATA = FALLBACK_DATA;
+        statusText.textContent = "Data Sandaran Tempatan (" + RAW_DATA.length + " rekod)";
+        statusPill.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200";
+        showToast("Menggunakan data demonstrasi terkini");
+      } finally {
+        refreshIcon.classList.remove("animate-spin");
+        buildFilterOptions();
+        applyFilters();
+        renderAllViews();
+      }
+    }
+
+    function buildFilterOptions() {
+      const catSelect = $("filter-cat");
+      const yearSelect = $("filter-year");
+      const monthSelect = $("filter-month");
+
+      const cats = [...new Set(RAW_DATA.map(d => d.Kategori).filter(Boolean))].sort();
+      const years = [...new Set(RAW_DATA.map(d => d.Tahun).filter(Boolean))].sort();
+      const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+      const currentCat = catSelect.value;
+      const currentYear = yearSelect.value;
+      const currentMonth = monthSelect.value;
+
+      catSelect.innerHTML = '<option value="">Semua Kategori</option>' +
+        cats.map(c => `<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join("");
+
+      yearSelect.innerHTML = '<option value="">Semua Tahun</option>' +
+        years.map(y => `<option value="${escapeHTML(y)}">${escapeHTML(y)}</option>`).join("");
+
+      const monthNames = ["Januari", "Februari", "Mac", "April", "Mei", "Jun", "Julai", "Ogos", "September", "Oktober", "November", "Disember"];
+      monthSelect.innerHTML = '<option value="">Semua Bulan</option>' +
+        months.map(m => `<option value="${m}">${monthNames[m - 1]}</option>`).join("");
+
+      if (cats.includes(currentCat)) catSelect.value = currentCat;
+      if (years.includes(currentYear)) yearSelect.value = currentYear;
+      if (currentMonth) monthSelect.value = currentMonth;
+    }
+
+    function handleFilterChange() {
+      CURRENT_PAGE = 1;
+      applyFilters();
+      renderHebahanTable();
+    }
+
+    function applyFilters() {
+      const q = $("search-input").value.trim().toLowerCase();
+      const cat = $("filter-cat").value;
+      const yr = $("filter-year").value;
+      const mo = $("filter-month").value;
+
+      FILTERED_DATA = RAW_DATA.filter(item => {
+        const textMatch = !q || [
+          item["Nama Geran"],
+          item["Penaja"],
+          item["Bidang (jika berkaitan)"],
+          item["Kategori"]
+        ].join(" ").toLowerCase().includes(q);
+
+        const catMatch = !cat || item.Kategori === cat;
+        const yrMatch = !yr || String(item.Tahun) === yr;
+
+        let moMatch = true;
+        if (mo) {
+          const d = parseDate(item["Tarikh Hebahan"]);
+          moMatch = d ? (d.getMonth() + 1 === Number(mo)) : false;
+        }
+
+        return textMatch && catMatch && yrMatch && moMatch;
+      });
+    }
+
+    function renderAllViews() {
+      renderRumusanKPI();
+      renderCharts();
+      renderHebahanTable();
+      renderAnalisisStats();
+      renderDeadlines();
+    }
+
+    function renderRumusanKPI() {
+      const totalHebahan = RAW_DATA.length;
+      const totalRec = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Diterima"]), 0);
+      const totalFwd = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Dimajukan Kepada Penaja"]), 0);
+      const totalApp = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Diluluskan"]), 0);
+      const approvalRate = totalRec > 0 ? ((totalApp / totalRec) * 100).toFixed(1) + "%" : "0%";
+
+      $("total-grants").textContent = formatNum(totalHebahan);
+      $("total-received").textContent = formatNum(totalRec);
+      $("total-forwarded").textContent = formatNum(totalFwd);
+      $("total-approved").textContent = formatNum(totalApp);
+      $("approval-rate").textContent = approvalRate;
+    }
+
+    function renderCharts() {
+      // 1. Monthly Timeline Chart
+      const monthMap = {};
+      RAW_DATA.forEach(d => {
+        const date = parseDate(d["Tarikh Hebahan"]);
+        if (date) {
+          const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+          monthMap[key] = (monthMap[key] || 0) + 1;
+        }
+      });
+      const sortedKeys = Object.keys(monthMap).sort();
+      const monthLabels = sortedKeys.map(k => {
+        const [y, m] = k.split("-");
+        return new Date(+y, +m - 1, 1).toLocaleDateString("ms-MY", { month: "short", year: "numeric" });
+      });
+      const monthValues = sortedKeys.map(k => monthMap[k]);
+
+      createOrUpdateChart("chart-monthly", "line", {
+        labels: monthLabels.length ? monthLabels : ["Tiada Data"],
+        datasets: [{
+          label: "Bilangan Hebahan",
+          data: monthValues.length ? monthValues : [0],
+          borderColor: "#4f46e5",
+          backgroundColor: "rgba(79, 70, 229, 0.08)",
+          fill: true,
+          tension: 0.35,
+          pointBackgroundColor: "#4f46e5",
+          pointRadius: 4
+        }]
+      }, {
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+      });
+
+      // 2. Category Doughnut Chart
+      const categories = [...new Set(RAW_DATA.map(d => d.Kategori).filter(Boolean))];
+      const catCounts = categories.map(cat => RAW_DATA.filter(d => d.Kategori === cat).length);
+      const catColors = [
+        "#6366f1", "#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"
+      ];
+
+      createOrUpdateChart("chart-category", "doughnut", {
+        labels: categories,
+        datasets: [{
+          data: catCounts,
+          backgroundColor: catColors.slice(0, categories.length),
+          borderWidth: 2,
+          borderColor: "#ffffff"
+        }]
+      }, {
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+        },
+        cutout: "68%"
+      });
+
+      // 3. Category: Received vs Approved Bar Chart
+      const catReceived = categories.map(c =>
+        RAW_DATA.filter(d => d.Kategori === c).reduce((sum, d) => sum + toNum(d["Bilangan Permohonan Diterima"]), 0)
+      );
+      const catApproved = categories.map(c =>
+        RAW_DATA.filter(d => d.Kategori === c).reduce((sum, d) => sum + toNum(d["Bilangan Permohonan Diluluskan"]), 0)
+      );
+
+      createOrUpdateChart("chart-cat-apps", "bar", {
+        labels: categories,
+        datasets: [
+          {
+            label: "Diterima",
+            data: catReceived,
+            backgroundColor: "#818cf8",
+            borderRadius: 6
+          },
+          {
+            label: "Diluluskan",
+            data: catApproved,
+            backgroundColor: "#10b981",
+            borderRadius: 6
+          }
+        ]
+      }, {
+        plugins: { legend: { position: 'bottom' } },
+        scales: { y: { beginAtZero: true } }
+      });
+
+      // 4. Top 10 Sponsors Horizontal Bar
+      const sponsorCounts = {};
+      RAW_DATA.forEach(d => {
+        const s = d.Penaja || "Lain-lain";
+        sponsorCounts[s] = (sponsorCounts[s] || 0) + 1;
+      });
+      const topSponsors = Object.entries(sponsorCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8);
+
+      createOrUpdateChart("chart-sponsors", "bar", {
+        labels: topSponsors.map(item => item[0]),
+        datasets: [{
+          label: "Hebahan",
+          data: topSponsors.map(item => item[1]),
+          backgroundColor: "#3b82f6",
+          borderRadius: 6
+        }]
+      }, {
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+      });
+
+      // 5. Pipeline Funnel
+      const totalRec = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Diterima"]), 0);
+      const totalFwd = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Dimajukan Kepada Penaja"]), 0);
+      const totalApp = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Diluluskan"]), 0);
+
+      createOrUpdateChart("chart-pipeline", "bar", {
+        labels: ["1. Diterima di UTM", "2. Dimajukan ke Penaja", "3. Berjaya Diluluskan"],
+        datasets: [{
+          label: "Jumlah Permohonan",
+          data: [totalRec, totalFwd, totalApp],
+          backgroundColor: ["#6366f1", "#3b82f6", "#10b981"],
+          borderRadius: 8
+        }]
+      }, {
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+      });
+
+      // 6. Category Performance Detailed
+      createOrUpdateChart("chart-performance", "bar", {
+        labels: categories,
+        datasets: [
+          {
+            label: "Diterima",
+            data: catReceived,
+            backgroundColor: "#94a3b8",
+            borderRadius: 4
+          },
+          {
+            label: "Dimajukan",
+            data: categories.map(c =>
+              RAW_DATA.filter(d => d.Kategori === c).reduce((sum, d) => sum + toNum(d["Bilangan Permohonan Dimajukan Kepada Penaja"]), 0)
+            ),
+            backgroundColor: "#6366f1",
+            borderRadius: 4
+          },
+          {
+            label: "Diluluskan",
+            data: catApproved,
+            backgroundColor: "#10b981",
+            borderRadius: 4
+          }
+        ]
+      }, {
+        plugins: { legend: { position: 'bottom' } },
+        scales: { y: { beginAtZero: true } }
+      });
+    }
+
+    function createOrUpdateChart(canvasId, type, data, options = {}) {
+      if (CHART_INSTANCES[canvasId]) {
+        CHART_INSTANCES[canvasId].destroy();
+      }
+      const ctx = $(canvasId);
+      if (!ctx) return;
+      CHART_INSTANCES[canvasId] = new Chart(ctx, {
+        type,
+        data,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          font: { family: 'Inter' },
+          ...options
+        }
+      });
+    }
+
+    function getCategoryBadge(cat) {
+      const c = (cat || "").toLowerCase();
+      let colorClass = "bg-slate-100 text-slate-700";
+      if (c.includes("international") || c.includes("antarabangsa")) {
+        colorClass = "bg-purple-100 text-purple-700 border-purple-200";
+      } else if (c.includes("national") || c.includes("kebangsaan")) {
+        colorClass = "bg-sky-100 text-sky-700 border-sky-200";
+      } else if (c.includes("university") || c.includes("universiti")) {
+        colorClass = "bg-emerald-100 text-emerald-700 border-emerald-200";
+      } else if (c.includes("industry") || c.includes("industri")) {
+        colorClass = "bg-amber-100 text-amber-700 border-amber-200";
+      }
+      return `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border ${colorClass}">${escapeHTML(cat || "Lain-lain")}</span>`;
+    }
+
+    function renderHebahanTable() {
+      const tbody = $("table-body");
+      const totalFiltered = FILTERED_DATA.length;
+      const totalPages = Math.max(1, Math.ceil(totalFiltered / PAGE_SIZE));
+
+      if (CURRENT_PAGE > totalPages) CURRENT_PAGE = totalPages;
+
+      const startIndex = (CURRENT_PAGE - 1) * PAGE_SIZE;
+      const pageItems = FILTERED_DATA.slice(startIndex, startIndex + PAGE_SIZE);
+
+      $("table-count-label").textContent = `Memaparkan ${pageItems.length > 0 ? startIndex + 1 : 0} hingga ${startIndex + pageItems.length} daripada ${formatNum(totalFiltered)} rekod`;
+      $("page-indicator").textContent = `${CURRENT_PAGE} / ${totalPages}`;
+      $("btn-prev").disabled = CURRENT_PAGE <= 1;
+      $("btn-next").disabled = CURRENT_PAGE >= totalPages;
+
+      if (pageItems.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="py-8 text-center text-slate-400 font-medium">Tiada padanan hebahan geran dijumpai.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = pageItems.map((item, idx) => {
+        const absoluteIndex = startIndex + idx;
+        const rawIndex = RAW_DATA.indexOf(item);
+        const received = toNum(item["Bilangan Permohonan Diterima"]);
+        const approved = toNum(item["Bilangan Permohonan Diluluskan"]);
+
+        return `
+          <tr class="hover:bg-slate-50/70 transition">
+            <td class="py-3 px-4 text-center font-semibold text-slate-400 text-[11px]">${absoluteIndex + 1}</td>
+            <td class="py-3 px-4 font-semibold text-slate-900 max-w-[280px]">
+              <div class="truncate" title="${escapeHTML(item["Nama Geran"])}">${escapeHTML(item["Nama Geran"])}</div>
+              ${item["Bidang (jika berkaitan)"] ? `<div class="text-[10px] text-slate-400 truncate mt-0.5">${escapeHTML(item["Bidang (jika berkaitan)"])}</div>` : ''}
+            </td>
+            <td class="py-3 px-4 text-slate-600 max-w-[180px] truncate" title="${escapeHTML(item.Penaja)}">${escapeHTML(item.Penaja)}</td>
+            <td class="py-3 px-4 whitespace-nowrap">${getCategoryBadge(item.Kategori)}</td>
+            <td class="py-3 px-4 text-slate-500 whitespace-nowrap">${formatDate(item["Tarikh Hebahan"])}</td>
+            <td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">${formatDate(item["Tarikh Tutup Permohonan (UTM)"])}</td>
+            <td class="py-3 px-4 text-center font-semibold text-slate-700">${formatNum(received)}</td>
+            <td class="py-3 px-4 text-center font-semibold text-emerald-600">${formatNum(approved)}</td>
+            <td class="py-3 px-4 text-center whitespace-nowrap">
+              <button onclick="openModal(${rawIndex})" class="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition border border-indigo-200/60 active:scale-95">
+                Perincian
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function changePage(direction) {
+      CURRENT_PAGE += direction;
+      renderHebahanTable();
+    }
+
+    function renderAnalisisStats() {
+      const withApps = RAW_DATA.filter(d => toNum(d["Bilangan Permohonan Diterima"]) > 0).length;
+      const noApps = RAW_DATA.length - withApps;
+      const totalRec = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Diterima"]), 0);
+      const totalApp = RAW_DATA.reduce((acc, d) => acc + toNum(d["Bilangan Permohonan Diluluskan"]), 0);
+
+      $("analisis-with-apps").textContent = formatNum(withApps);
+      $("analisis-no-apps").textContent = formatNum(noApps);
+      $("analisis-total-apps").textContent = formatNum(totalRec);
+      $("analisis-approved-apps").textContent = formatNum(totalApp);
+    }
+
+    function getDeadlineStatus(item) {
+      const dateVal = item["Tarikh Tutup Permohonan (UTM)"];
+      const d = parseDate(dateVal);
+      if (!d) return "nodate";
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      d.setHours(0, 0, 0, 0);
+
+      const diffDays = Math.ceil((d - today) / (1000 * 60 * 60 * 24));
+      if (diffDays < 0) return "closed";
+      if (diffDays <= 14) return "soon";
+      return "open";
+    }
+
+    function renderDeadlines() {
+      const q = ($("deadline-search") ? $("deadline-search").value : "").trim().toLowerCase();
+      const statusFilter = $("deadline-filter-status") ? $("deadline-filter-status").value : "";
+
+      let countOpen = 0;
+      let countSoon = 0;
+      let countClosed = 0;
+      let countNoDate = 0;
+
+      RAW_DATA.forEach(item => {
+        const st = getDeadlineStatus(item);
+        if (st === "open") countOpen++;
+        else if (st === "soon") countSoon++;
+        else if (st === "closed") countClosed++;
+        else countNoDate++;
+      });
+
+      $("count-open").textContent = formatNum(countOpen);
+      $("count-soon").textContent = formatNum(countSoon);
+      $("count-closed").textContent = formatNum(countClosed);
+      $("count-nodate").textContent = formatNum(countNoDate);
+
+      const items = RAW_DATA.filter(item => {
+        const st = getDeadlineStatus(item);
+        const matchStatus = !statusFilter || st === statusFilter;
+        const matchText = !q || [item["Nama Geran"], item.Penaja, item.Kategori].join(" ").toLowerCase().includes(q);
+        return matchStatus && matchText;
+      }).sort((a, b) => {
+        const da = parseDate(a["Tarikh Tutup Permohonan (UTM)"]) || new Date(9999, 0, 1);
+        const db = parseDate(b["Tarikh Tutup Permohonan (UTM)"]) || new Date(9999, 0, 1);
+        return da - db;
+      });
+
+      const container = $("deadlines-container");
+      if (items.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-medium bg-white rounded-2xl border border-slate-200">Tiada geran menepati kriteria carian tarikh.</div>`;
+        return;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      container.innerHTML = items.map(item => {
+        const st = getDeadlineStatus(item);
+        const d = parseDate(item["Tarikh Tutup Permohonan (UTM)"]);
+        let badgeHTML = "";
+        let borderClass = "border-slate-200";
+
+        if (st === "nodate") {
+          badgeHTML = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">Tiada Tarikh</span>`;
+        } else if (st === "closed") {
+          badgeHTML = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700">Telah Ditutup</span>`;
+          borderClass = "border-rose-200/80 bg-rose-50/20";
+        } else if (st === "soon") {
+          const daysLeft = Math.ceil((d - today) / (1000 * 60 * 60 * 24));
+          badgeHTML = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 animate-pulse">${daysLeft} Hari Lagi</span>`;
+          borderClass = "border-amber-300 bg-amber-50/30";
+        } else {
+          const daysLeft = Math.ceil((d - today) / (1000 * 60 * 60 * 24));
+          badgeHTML = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">${daysLeft} Hari Lagi</span>`;
+          borderClass = "border-emerald-200/80";
+        }
+
+        const rawIndex = RAW_DATA.indexOf(item);
+
+        return `
+          <div class="bg-white rounded-2xl border ${borderClass} p-4 subtle-shadow flex flex-col justify-between hover:shadow-md transition">
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${escapeHTML(item.Kategori || "Umum")}</span>
+                ${badgeHTML}
+              </div>
+              <h4 class="text-xs font-bold text-slate-900 line-clamp-2" title="${escapeHTML(item["Nama Geran"])}">${escapeHTML(item["Nama Geran"])}</h4>
+              <p class="text-[11px] text-slate-500 mt-1 truncate">${escapeHTML(item.Penaja)}</p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] space-y-1">
+              <div class="flex justify-between text-slate-500">
+                <span>Tutup UTM:</span>
+                <span class="font-semibold text-slate-800">${formatDate(item["Tarikh Tutup Permohonan (UTM)"])}</span>
+              </div>
+              <div class="flex justify-between text-slate-500">
+                <span>Tutup Penaja:</span>
+                <span class="font-semibold text-slate-800">${formatDate(item["Tarikh Tutup Permohonan (Penaja)"])}</span>
+              </div>
+              <div class="pt-2 flex justify-end">
+                <button onclick="openModal(${rawIndex})" class="text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
+                  Lihat Info &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function openModal(index) {
+      const item = RAW_DATA[index];
+      if (!item) return;
+
+      ACTIVE_MODAL_ITEM = item;
+
+      $("modal-grant-title").textContent = item["Nama Geran"] || "Tiada Tajuk";
+      $("modal-grant-sponsor").textContent = (item.Penaja || "—") + (item.Tahun ? ` • Tahun ${item.Tahun}` : "");
+      $("modal-category-badge").textContent = item.Kategori || "Kategori";
+
+      const rec = toNum(item["Bilangan Permohonan Diterima"]);
+      const fwd = toNum(item["Bilangan Permohonan Dimajukan Kepada Penaja"]);
+      const app = toNum(item["Bilangan Permohonan Diluluskan"]);
+      const rate = rec > 0 ? ((app / rec) * 100).toFixed(1) + "%" : "0%";
+
+      const fields = [
+        { label: "Bidang Penyelidikan", val: item["Bidang (jika berkaitan)"] || "Umum" },
+        { label: "Tarikh Hebahan", val: formatDate(item["Tarikh Hebahan"]) },
+        { label: "Tarikh Tutup (UTM)", val: formatDate(item["Tarikh Tutup Permohonan (UTM)"]) },
+        { label: "Tarikh Tutup (Penaja)", val: formatDate(item["Tarikh Tutup Permohonan (Penaja)"]) },
+        { label: "Permohonan Diterima", val: `${formatNum(rec)} permohonan` },
+        { label: "Dimajukan ke Penaja", val: `${formatNum(fwd)} permohonan` },
+        { label: "Permohonan Diluluskan", val: `${formatNum(app)} permohonan` },
+        { label: "Kadar Kejayaan Kelulusan", val: rate },
+        { label: "Alamat E-mel Rujukan", val: item.Email || "rmc@utm.my" },
+        { label: "Status Tempoh UTM", val: getDeadlineStatus(item) === "open" ? "Masih Dibuka" : (getDeadlineStatus(item) === "soon" ? "Hampir Tamat" : "Telah Tutup") }
+      ];
+
+      $("modal-content").innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          ${fields.map(f => `
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+              <span class="block text-[10px] text-slate-400 font-semibold uppercase tracking-wider">${f.label}</span>
+              <span class="block text-xs font-bold text-slate-800 mt-0.5">${escapeHTML(f.val)}</span>
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      $("modal-container").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      $("modal-container").classList.add("hidden");
+      ACTIVE_MODAL_ITEM = null;
+    }
+
+    // Modal background click close
+    $("modal-container").addEventListener("click", function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    function copyModalDetails() {
+      if (!ACTIVE_MODAL_ITEM) return;
+      const text = [
+        `GERAN: ${ACTIVE_MODAL_ITEM["Nama Geran"]}`,
+        `PENAJA: ${ACTIVE_MODAL_ITEM.Penaja}`,
+        `KATEGORI: ${ACTIVE_MODAL_ITEM.Kategori}`,
+        `TARIKH TUTUP UTM: ${formatDate(ACTIVE_MODAL_ITEM["Tarikh Tutup Permohonan (UTM)"])}`,
+        `TARIKH TUTUP PENAJA: ${formatDate(ACTIVE_MODAL_ITEM["Tarikh Tutup Permohonan (Penaja)"])}`,
+        `STATUS PERMOHONAN: Diterima: ${ACTIVE_MODAL_ITEM["Bilangan Permohonan Diterima"] || 0}, Diluluskan: ${ACTIVE_MODAL_ITEM["Bilangan Permohonan Diluluskan"] || 0}`,
+        `EMAIL RUJUKAN: ${ACTIVE_MODAL_ITEM.Email || "rmc@utm.my"}`
+      ].join("\n");
+
+      // Robust execCommand clipboard copy
+      const tempArea = document.createElement("textarea");
+      tempArea.value = text;
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand("copy");
+        showToast("Butiran geran disalin ke papan klip!");
+      } catch (err) {
+        showToast("Tidak dapat menyalin butiran.");
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    function exportCSV() {
+      if (!RAW_DATA || RAW_DATA.length === 0) {
+        showToast("Tiada data untuk dieksport.");
+        return;
+      }
+      const headers = Object.keys(RAW_DATA[0]);
+      const csvRows = [];
+      csvRows.push(headers.map(h => `"${h.replace(/"/g, '""')}"`).join(","));
+
+      RAW_DATA.forEach(row => {
+        const values = headers.map(header => {
+          const val = row[header] ?? "";
+          return `"${String(val).replace(/"/g, '""')}"`;
+        });
+        csvRows.push(values.join(","));
+      });
+
+      const csvBlob = new Blob([csvRows.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(csvBlob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `PROFUND_UTM_HebahanGeran_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("Fail CSV berjaya dimuat turun!");
+    }
+
+    function switchTab(tabId, buttonElement) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+      document.querySelectorAll(".nav-tab").forEach(el => {
+        el.classList.remove("active", "bg-indigo-50", "text-indigo-700");
+        el.classList.add("text-slate-600");
+      });
+
+      $(`tab-${tabId}`).classList.remove("hidden");
+      if (buttonElement) {
+        buttonElement.classList.add("active", "bg-indigo-50", "text-indigo-700");
+        buttonElement.classList.remove("text-slate-600");
+      }
+
+      const titles = {
+        rumusan: "Ringkasan Eksekutif Geran",
+        hebahan: "Senarai Hebahan Geran Penyelidikan",
+        analisis: "Analisis Saluran & Prestasi Permohonan",
+        tarikh: "Pemantauan Tarikh Tutup & Garis Masa"
+      };
+      $("page-title").textContent = titles[tabId] || "PROFUND UTM";
+
+      // Close mobile drawer on selection
+      if (window.innerWidth < 768) {
+        toggleMobileMenu(false);
+      }
+    }
+
+    function toggleMobileMenu(forceState) {
+      const sidebar = $("sidebar");
+      const overlay = $("sidebar-overlay");
+      const isClosed = sidebar.classList.contains("-translate-x-full");
+      const shouldOpen = forceState !== undefined ? forceState : isClosed;
+
+      if (shouldOpen) {
+        sidebar.classList.remove("-translate-x-full");
+        overlay.classList.remove("hidden");
+      } else {
+        sidebar.classList.add("-translate-x-full");
+        overlay.classList.add("hidden");
+      }
+    }
+
+    // Initial load
+    window.addEventListener("DOMContentLoaded", () => {
+      fetchData();
+    });
+  </script>
+</body>
+</html>
