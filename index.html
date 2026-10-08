@@ -8,6 +8,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <!-- Chart.js DataLabels Plugin CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -377,47 +379,79 @@
       </section>
 
       <section id="tab-tarikh" class="tab-content hidden space-y-6">
-        <!-- Status summary tabs -->
+        <!-- Status summary tabs / Interactive Filter Cards -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-          <div class="bg-white p-4 rounded-2xl border border-emerald-200 subtle-shadow flex flex-col justify-between">
-            <span class="text-xs font-medium text-emerald-700 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Masih Dibuka
-            </span>
+          <div id="card-filter-open" onclick="filterByDeadlineCard('open')" class="deadline-stat-card cursor-pointer bg-white p-4 rounded-2xl border border-emerald-200 subtle-shadow flex flex-col justify-between transition-all duration-200 hover:shadow-md hover:border-emerald-400 active:scale-95 select-none relative overflow-hidden group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-emerald-700 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Masih Dibuka
+              </span>
+              <span class="text-[10px] text-emerald-600/70 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Tapis &darr;</span>
+            </div>
             <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-open">—</div>
+            <div class="active-indicator hidden text-[10px] font-bold text-emerald-800 mt-1 flex items-center gap-1">
+              <span>● Aktif</span> <span class="text-[9px] font-normal text-emerald-600">(Klik untuk batal)</span>
+            </div>
           </div>
-          <div class="bg-white p-4 rounded-2xl border border-amber-200 subtle-shadow flex flex-col justify-between">
-            <span class="text-xs font-medium text-amber-700 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span> Segera (≤ 14 Hari)
-            </span>
+
+          <div id="card-filter-soon" onclick="filterByDeadlineCard('soon')" class="deadline-stat-card cursor-pointer bg-white p-4 rounded-2xl border border-amber-200 subtle-shadow flex flex-col justify-between transition-all duration-200 hover:shadow-md hover:border-amber-400 active:scale-95 select-none relative overflow-hidden group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-amber-700 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span> Segera (&le; 14 Hari)
+              </span>
+              <span class="text-[10px] text-amber-600/70 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Tapis &darr;</span>
+            </div>
             <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-soon">—</div>
+            <div class="active-indicator hidden text-[10px] font-bold text-amber-800 mt-1 flex items-center gap-1">
+              <span>● Aktif</span> <span class="text-[9px] font-normal text-amber-600">(Klik untuk batal)</span>
+            </div>
           </div>
-          <div class="bg-white p-4 rounded-2xl border border-rose-200 subtle-shadow flex flex-col justify-between">
-            <span class="text-xs font-medium text-rose-700 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span> Sudah Tutup
-            </span>
+
+          <div id="card-filter-closed" onclick="filterByDeadlineCard('closed')" class="deadline-stat-card cursor-pointer bg-white p-4 rounded-2xl border border-rose-200 subtle-shadow flex flex-col justify-between transition-all duration-200 hover:shadow-md hover:border-rose-400 active:scale-95 select-none relative overflow-hidden group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-rose-700 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> Sudah Tutup
+              </span>
+              <span class="text-[10px] text-rose-600/70 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Tapis &darr;</span>
+            </div>
             <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-closed">—</div>
+            <div class="active-indicator hidden text-[10px] font-bold text-rose-800 mt-1 flex items-center gap-1">
+              <span>● Aktif</span> <span class="text-[9px] font-normal text-rose-600">(Klik untuk batal)</span>
+            </div>
           </div>
-          <div class="bg-white p-4 rounded-2xl border border-slate-200 subtle-shadow flex flex-col justify-between">
-            <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-slate-400"></span> Tiada Tarikh Tutup
-            </span>
+
+          <div id="card-filter-nodate" onclick="filterByDeadlineCard('nodate')" class="deadline-stat-card cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 subtle-shadow flex flex-col justify-between transition-all duration-200 hover:shadow-md hover:border-slate-400 active:scale-95 select-none relative overflow-hidden group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-slate-400"></span> Tiada Tarikh Tutup
+              </span>
+              <span class="text-[10px] text-slate-400 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Tapis &darr;</span>
+            </div>
             <div class="text-2xl font-bold text-slate-900 mt-2 font-display" id="count-nodate">—</div>
+            <div class="active-indicator hidden text-[10px] font-bold text-slate-800 mt-1 flex items-center gap-1">
+              <span>● Aktif</span> <span class="text-[9px] font-normal text-slate-500">(Klik untuk batal)</span>
+            </div>
           </div>
         </div>
 
         <!-- Filter bar for Deadlines -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 subtle-shadow flex flex-col sm:flex-row gap-3">
-          <div class="relative flex-1">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 subtle-shadow flex flex-col sm:flex-row gap-3 items-center">
+          <div class="relative flex-1 w-full">
             <input id="deadline-search" type="text" placeholder="Cari nama geran atau penaja..." oninput="renderDeadlines()" class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
             <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </div>
-          <select id="deadline-filter-status" onchange="renderDeadlines()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
-            <option value="">Semua Status Tarikh</option>
-            <option value="open">Masih Dibuka</option>
-            <option value="soon">Segera (≤ 14 Hari)</option>
-            <option value="closed">Sudah Tutup</option>
-            <option value="nodate">Tiada Tarikh Tetap</option>
-          </select>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <select id="deadline-filter-status" onchange="renderDeadlines()" class="w-full sm:w-auto px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
+              <option value="">Semua Status Tarikh</option>
+              <option value="open">Masih Dibuka</option>
+              <option value="soon">Segera (≤ 14 Hari)</option>
+              <option value="closed">Sudah Tutup</option>
+              <option value="nodate">Tiada Tarikh Tetap</option>
+            </select>
+            <button id="btn-reset-deadline-filter" onclick="filterByDeadlineCard('')" class="hidden px-2.5 py-2 text-xs rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold transition whitespace-nowrap" title="Set semula tapisan">
+              ✕ Reset
+            </button>
+          </div>
         </div>
 
         <!-- Deadlines Grid Container -->
@@ -800,6 +834,11 @@
     }
 
     function renderCharts() {
+      // Register ChartDataLabels plugin globally
+      if (typeof ChartDataLabels !== 'undefined') {
+        Chart.register(ChartDataLabels);
+      }
+
       // 1. Monthly Timeline Chart
       const monthMap = {};
       RAW_DATA.forEach(d => {
@@ -826,11 +865,25 @@
           fill: true,
           tension: 0.35,
           pointBackgroundColor: "#4f46e5",
-          pointRadius: 4
+          pointRadius: 5,
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            offset: 4,
+            color: '#4338ca',
+            font: { weight: 'bold', size: 11 },
+            formatter: v => v > 0 ? formatNum(v) : ''
+          }
         }]
       }, {
         plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { precision: 0 },
+            grace: '15%'
+          }
+        }
       });
 
       // 2. Category Doughnut Chart
@@ -846,13 +899,18 @@
           data: catCounts,
           backgroundColor: catColors.slice(0, categories.length),
           borderWidth: 2,
-          borderColor: "#ffffff"
+          borderColor: "#ffffff",
+          datalabels: {
+            color: '#ffffff',
+            font: { weight: 'bold', size: 11 },
+            formatter: (v) => v > 0 ? formatNum(v) : ''
+          }
         }]
       }, {
         plugins: {
           legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
         },
-        cutout: "68%"
+        cutout: "65%"
       });
 
       // 3. Category: Received vs Approved Bar Chart
@@ -870,18 +928,39 @@
             label: "Diterima",
             data: catReceived,
             backgroundColor: "#818cf8",
-            borderRadius: 6
+            borderRadius: 6,
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              offset: 2,
+              color: '#4338ca',
+              font: { weight: 'bold', size: 10 },
+              formatter: v => v > 0 ? formatNum(v) : ''
+            }
           },
           {
             label: "Diluluskan",
             data: catApproved,
             backgroundColor: "#10b981",
-            borderRadius: 6
+            borderRadius: 6,
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              offset: 2,
+              color: '#065f46',
+              font: { weight: 'bold', size: 10 },
+              formatter: v => v > 0 ? formatNum(v) : ''
+            }
           }
         ]
       }, {
         plugins: { legend: { position: 'bottom' } },
-        scales: { y: { beginAtZero: true } }
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '15%'
+          }
+        }
       });
 
       // 4. Top 10 Sponsors Horizontal Bar
@@ -900,12 +979,26 @@
           label: "Hebahan",
           data: topSponsors.map(item => item[1]),
           backgroundColor: "#3b82f6",
-          borderRadius: 6
+          borderRadius: 6,
+          datalabels: {
+            anchor: 'end',
+            align: 'right',
+            offset: 4,
+            color: '#1e40af',
+            font: { weight: 'bold', size: 10 },
+            formatter: v => v > 0 ? formatNum(v) : ''
+          }
         }]
       }, {
         indexAxis: 'y',
         plugins: { legend: { display: false } },
-        scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { precision: 0 },
+            grace: '18%'
+          }
+        }
       });
 
       // 5. Pipeline Funnel
@@ -919,11 +1012,24 @@
           label: "Jumlah Permohonan",
           data: [totalRec, totalFwd, totalApp],
           backgroundColor: ["#6366f1", "#3b82f6", "#10b981"],
-          borderRadius: 8
+          borderRadius: 8,
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            offset: 4,
+            color: '#1e293b',
+            font: { weight: 'bold', size: 11 },
+            formatter: v => formatNum(v)
+          }
         }]
       }, {
         plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true } }
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '15%'
+          }
+        }
       });
 
       // 6. Category Performance Detailed
@@ -934,7 +1040,15 @@
             label: "Diterima",
             data: catReceived,
             backgroundColor: "#94a3b8",
-            borderRadius: 4
+            borderRadius: 4,
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              offset: 2,
+              color: '#475569',
+              font: { weight: 'bold', size: 9 },
+              formatter: v => v > 0 ? formatNum(v) : ''
+            }
           },
           {
             label: "Dimajukan",
@@ -942,18 +1056,39 @@
               RAW_DATA.filter(d => d.Kategori === c).reduce((sum, d) => sum + toNum(d["Bilangan Permohonan Dimajukan Kepada Penaja"]), 0)
             ),
             backgroundColor: "#6366f1",
-            borderRadius: 4
+            borderRadius: 4,
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              offset: 2,
+              color: '#4338ca',
+              font: { weight: 'bold', size: 9 },
+              formatter: v => v > 0 ? formatNum(v) : ''
+            }
           },
           {
             label: "Diluluskan",
             data: catApproved,
             backgroundColor: "#10b981",
-            borderRadius: 4
+            borderRadius: 4,
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              offset: 2,
+              color: '#065f46',
+              font: { weight: 'bold', size: 9 },
+              formatter: v => v > 0 ? formatNum(v) : ''
+            }
           }
         ]
       }, {
         plugins: { legend: { position: 'bottom' } },
-        scales: { y: { beginAtZero: true } }
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '15%'
+          }
+        }
       });
     }
 
@@ -1071,9 +1206,59 @@
       return "open";
     }
 
+    function filterByDeadlineCard(status) {
+      const select = $("deadline-filter-status");
+      if (!select) return;
+
+      // Toggle behavior: if clicking the currently active status, reset to show all
+      if (select.value === status && status !== "") {
+        select.value = "";
+      } else {
+        select.value = status;
+      }
+
+      renderDeadlines();
+    }
+
+    function syncDeadlineCardHighlights(activeStatus) {
+      const cardMap = {
+        open: { id: "card-filter-open", ring: "ring-2 ring-emerald-500 bg-emerald-50/40 border-emerald-400" },
+        soon: { id: "card-filter-soon", ring: "ring-2 ring-amber-500 bg-amber-50/40 border-amber-400" },
+        closed: { id: "card-filter-closed", ring: "ring-2 ring-rose-500 bg-rose-50/40 border-rose-400" },
+        nodate: { id: "card-filter-nodate", ring: "ring-2 ring-slate-500 bg-slate-50/70 border-slate-400" }
+      };
+
+      Object.keys(cardMap).forEach(key => {
+        const cardEl = $(cardMap[key].id);
+        if (!cardEl) return;
+        const indicator = cardEl.querySelector(".active-indicator");
+        const activeClasses = cardMap[key].ring.split(" ");
+
+        if (key === activeStatus) {
+          cardEl.classList.add(...activeClasses);
+          if (indicator) indicator.classList.remove("hidden");
+        } else {
+          cardEl.classList.remove(...activeClasses);
+          if (indicator) indicator.classList.add("hidden");
+        }
+      });
+
+      const resetBtn = $("btn-reset-deadline-filter");
+      if (resetBtn) {
+        if (activeStatus) {
+          resetBtn.classList.remove("hidden");
+        } else {
+          resetBtn.classList.add("hidden");
+        }
+      }
+    }
+
     function renderDeadlines() {
       const q = ($("deadline-search") ? $("deadline-search").value : "").trim().toLowerCase();
       const statusFilter = $("deadline-filter-status") ? $("deadline-filter-status").value : "";
+
+      // Sync visual highlight on the cards
+      syncDeadlineCardHighlights(statusFilter);
 
       let countOpen = 0;
       let countSoon = 0;
@@ -1106,7 +1291,11 @@
 
       const container = $("deadlines-container");
       if (items.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-medium bg-white rounded-2xl border border-slate-200">Tiada geran menepati kriteria carian tarikh.</div>`;
+        container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 font-medium bg-white rounded-2xl border border-slate-200">
+          <p class="text-sm text-slate-600 font-semibold">Tiada geran dijumpai untuk pilihan ini.</p>
+          <p class="text-xs text-slate-400 mt-1">Cuba pilih status tarikh lain atau kosongkan carian anda.</p>
+          <button onclick="filterByDeadlineCard('')" class="mt-3 px-3 py-1.5 text-xs bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-lg font-semibold transition">Papar Semua Geran</button>
+        </div>`;
         return;
       }
 
